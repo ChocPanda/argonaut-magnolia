@@ -1,6 +1,15 @@
-# argonaut-magnolia #
+# Argonaut Magnolia #
 
 Welcome to argonaut-magnolia!
+
+This project is a WORK IN PROGRESS, it currently doesn't compile and has no tests
+
+I am attempting to derive [Argonaut]() type classes namely, encoders and decoders using
+[Magnolia](). The functionality would be very similar to [ArgonautShapeless]() but hopefully
+with the compile time benefits that magnolia provides over shapeless.
+
+There is a little more functionality in the hinted derivation which I shall document once
+the code compiles.... Again this DOES NOT COMPILE YET...
 
 ## Contribution policy ##
 
