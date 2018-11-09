@@ -16,24 +16,23 @@
 
 package argonaut.magnolia.derive
 
-import adt._
-import utest._
+import adt.{ Empty, EmptyCC }
 import argonaut.Argonaut._
 import argonaut._
-import EncodeJsonTool._
+import argonaut.magnolia.derive.DecodeJsonTool._
+import utest._
 
-object EncodeJsonToolTest extends TestSuite {
+object DecodeJsonToolTest extends TestSuite {
 
   val tests = Tests {
     'test - {
       'Empty - {
-        assert(Empty.asJson == Json.obj())
+        assert(Json.obj().as[Empty.type].value.nonEmpty)
       }
 
       'EmptyCC - {
-        assert(EmptyCC().asJson == Json.obj())
+        assert(Json.obj().as[EmptyCC].value.nonEmpty)
       }
     }
   }
-
 }

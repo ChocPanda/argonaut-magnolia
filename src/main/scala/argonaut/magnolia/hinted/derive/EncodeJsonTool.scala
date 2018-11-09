@@ -23,7 +23,7 @@ import scala.language.experimental.macros
 
 object EncodeJsonTool {
 
-  def gen[T]: Typeclass[T] = macro Magnolia.gen[T]
+  implicit def gen[T]: Typeclass[T] = macro Magnolia.gen[T]
 
   type Typeclass[T] = EncodeJson[T]
 

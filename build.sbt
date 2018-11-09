@@ -10,11 +10,9 @@ lazy val `argonaut-magnolia` =
       libraryDependencies ++= Seq(
         library.argonaut,
         library.magnolia,
-        library.scalactic
       ),
       libraryDependencies ++= Seq(
         library.scalaCheck % Test,
-        library.scalatest  % Test,
         library.utest      % Test
       )
     )
@@ -28,7 +26,6 @@ lazy val library =
   new {
     object Version {
       val scalaCheck = "1.14.0"
-      val scalatest  = "3.0.5"
       val magnolia   = "0.10.0"
       val argonaut   = "6.2.2"
       val utest      = "0.6.5"
@@ -36,8 +33,6 @@ lazy val library =
 
     val magnolia   = "com.propensive" %% "magnolia"   % Version.magnolia
     val argonaut   = "io.argonaut"    %% "argonaut"   % Version.argonaut
-    val scalactic  = "org.scalactic"  %% "scalactic"  % Version.scalatest
-    val scalatest  = "org.scalatest"  %% "scalatest"  % Version.scalatest
     val scalaCheck = "org.scalacheck" %% "scalacheck" % Version.scalaCheck
     val utest      = "com.lihaoyi"    %% "utest"      % Version.utest
   }

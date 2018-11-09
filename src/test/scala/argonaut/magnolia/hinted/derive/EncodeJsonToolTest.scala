@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package argonaut.magnolia.derive
+package argonaut.magnolia.hinted.derive
 
 import adt._
-import utest._
 import argonaut.Argonaut._
 import argonaut._
+import utest._
 import EncodeJsonTool._
 
 object EncodeJsonToolTest extends TestSuite {
