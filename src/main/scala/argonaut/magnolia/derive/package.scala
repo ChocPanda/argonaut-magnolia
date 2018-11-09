@@ -16,4 +16,14 @@
 
 package argonaut.magnolia
 
-package object derive extends EncodeJsonTool with DecodeJsonTool
+import argonaut.CodecJson
+
+package object derive {
+
+//  implicit def deriveCodec[T]: CodecJson[T] = {
+//    val encoder = EncodeJsonTool.gen[T]
+//    val decoder = DecodeJsonTool.gen[T]
+//    CodecJson[T](encoder.encode, decoder.decode)
+//  }
+
+}

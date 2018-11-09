@@ -21,7 +21,9 @@ import _root_.magnolia._
 
 import scala.language.experimental.macros
 
-trait EncodeJsonTool {
+object EncodeJsonTool {
+
+  def gen[T]: Typeclass[T] = macro Magnolia.gen[T]
 
   type Typeclass[T] = EncodeJson[T]
 
@@ -39,8 +41,4 @@ trait EncodeJsonTool {
       json.->:((typeHintField, JString(subtype.typeName.short)))
     }
   }
-
-  implicit def gen[T]: Typeclass[T] = macro Magnolia.gen[T]
 }
-
-object EncodeJsonTool extends EncodeJsonTool

@@ -38,7 +38,9 @@ trait EncodeJsonTool {
     }
   }
 
-  implicit def gen[T]: Typeclass[T] = macro Magnolia.gen[T]
+  def gen[T]: Typeclass[T] = macro Magnolia.gen[T]
 }
 
-object EncodeJsonTool extends EncodeJsonTool
+object EncodeJsonTool extends EncodeJsonTool {
+  implicit def derive[T]: EncodeJson[T] = macro Magnolia.gen[T]
+}

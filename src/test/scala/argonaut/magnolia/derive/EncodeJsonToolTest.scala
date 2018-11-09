@@ -14,16 +14,24 @@
  * limitations under the License.
  */
 
-package argonaut.magnolia.hinted
+package argonaut.magnolia.derive
 
-import argonaut.CodecJson
+import adt._
+import utest._
+import argonaut.Argonaut._
+import argonaut._
+import EncodeJsonTool._
 
-package object derive {
+object EncodeJsonToolTest extends TestSuite {
 
-//  implicit def deriveCodec[T]: CodecJson[T] = {
-//    val encoder = EncodeJsonTool.gen[T]
-//    val decoder = DecodeJsonTool.gen[T]
-//    CodecJson[T](encoder.encode, decoder.decode)
-//  }
+  val tests = Tests {
+
+    'test - {
+      'Empty - {
+        assert(Empty.asJson == Json.obj())
+      }
+    }
+
+  }
 
 }

@@ -38,7 +38,7 @@ trait DecodeJsonTool {
 
   def combine[T](caseClass: CaseClass[Typeclass, T]): Typeclass[T] = { cursor: HCursor =>
     caseClass.constructMonadic { p =>
-      (cursor --\ p.label).as(p.typeclass)
+      (cursor --\ p.label).as(p.typeclass).asInstanceOf[DecodeResult[Param[DecodeJsonTool.this.Typeclass, T]#PType]]
     }
   }
 
@@ -52,7 +52,9 @@ trait DecodeJsonTool {
       } yield res
   }
 
-  implicit def gen[T]: Typeclass[T] = macro Magnolia.gen[T]
+  def gen[T]: Typeclass[T] = macro Magnolia.gen[T]
 }
 
-object DecodeJsonTool extends DecodeJsonTool
+object DecodeJsonTool extends DecodeJsonTool {
+  implicit def derive[T]: DecodeJson[T] = macro Magnolia.gen[T]
+}
