@@ -16,12 +16,63 @@
 
 package argonaut.magnolia.hinted
 
+import _root_.argonaut._
+import _root_.magnolia._
+import mercator.Monadic
+
+import scala.language.experimental.macros
+
 package object derive {
 
-//  implicit def deriveCodec[T]: CodecJson[T] = {
-//    val encoder = EncodeJsonTool.gen[T]
-//    val decoder = DecodeJsonTool.gen[T]
-//    CodecJson[T](encoder.encode, decoder.decode)
-//  }
+  type Typeclass[T] = CodecJson[T]
+
+  val typeHintField = "type"
+
+  implicit private val monadic: Monadic[DecodeResult] = new Monadic[DecodeResult] {
+    override def point[A](value: A): DecodeResult[A] = DecodeResult.ok(value)
+
+    override def flatMap[A, B](from: DecodeResult[A], fn: A => DecodeResult[B]): DecodeResult[B] = from.flatMap(fn)
+
+    override def map[A, B](from: DecodeResult[A], fn: A => B): DecodeResult[B] = from.map(fn)
+  }
+
+  def combine[T](ctx: CaseClass[Typeclass, T]): Typeclass[T] = {
+    val encoder = { t: T =>
+      Json(ctx.parameters.map { param =>
+        (param.label, param.typeclass.encode(param.dereference(t)))
+      }: _*)
+    }
+    val decoder: HCursor => DecodeResult[T] = { cursor: HCursor =>
+      ctx.constructMonadic { p =>
+        (cursor --\ p.label).as(p.typeclass).map { a: Param[Typeclass, T]#PType =>
+          a
+        }
+      }
+    }
+
+    CodecJson(encoder, decoder)
+  }
+
+  def dispatch[T](ctx: SealedTrait[Typeclass, T]): Typeclass[T] = {
+    val encoder = { t: T =>
+      ctx.dispatch(t) { subtype =>
+        val json = subtype.typeclass.encode(subtype.cast(t))
+        json.->:((typeHintField, JString(subtype.typeName.short)))
+      }
+    }
+    val decoder: HCursor => DecodeResult[T] = {
+      val names = Map(ctx.subtypes.map(subType => (subType.typeName.short, subType.typeclass)): _*)
+      cursor: HCursor =>
+        for {
+          typeName  <- cursor.field(typeHintField).as[String]
+          typeClass <- DecodeResult(names.get(typeName).toRight(("Unrecognized type hint", cursor.history)))
+          res       <- typeClass.decode(cursor)
+        } yield res
+    }
+
+    CodecJson(encoder, decoder)
+  }
+
+  implicit def gen[T]: Typeclass[T] = macro Magnolia.gen[T]
 
 }

@@ -14,18 +14,25 @@
  * limitations under the License.
  */
 
-package argonaut.magnolia.hinted.derive
+package argonaut.magnolia.derive
 
 import adt._
-import argonaut.Argonaut._
-import argonaut._
+import argonaut._, Argonaut._
 import utest._
-import EncodeJsonTool._
 
-object EncodeJsonToolTest extends TestSuite {
-
+object DerivationTest extends TestSuite {
   val tests = Tests {
-    'test - {
+    'Decode - {
+      'Empty - {
+        assert(Json.obj().as[Empty.type].value.nonEmpty)
+      }
+
+      'EmptyCC - {
+        assert(Json.obj().as[EmptyCC].value.nonEmpty)
+      }
+    }
+
+    'Encode - {
       'Empty - {
         assert(Empty.asJson == Json.obj())
       }
@@ -35,5 +42,4 @@ object EncodeJsonToolTest extends TestSuite {
       }
     }
   }
-
 }
