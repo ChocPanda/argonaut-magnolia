@@ -12,8 +12,9 @@ lazy val `argonaut-magnolia` =
         library.magnolia,
       ),
       libraryDependencies ++= Seq(
-        library.scalaCheck % Test,
-        library.utest      % Test
+        library.scalaCheck         % Test,
+        library.scalaCheckMagnolia % Test,
+        library.utest              % Test
       )
     )
     .enablePlugins(AutomateHeaderPlugin)
@@ -26,16 +27,18 @@ lazy val `argonaut-magnolia` =
 lazy val library =
   new {
     object Version {
-      val scalaCheck = "1.14.0"
-      val magnolia   = "0.10.0"
-      val argonaut   = "6.2.2"
-      val utest      = "0.6.5"
+      val scalaCheck         = "1.14.0"
+      val magnolia           = "0.10.0"
+      val argonaut           = "6.2.2"
+      val utest              = "0.6.5"
+      val scalacheckMagnolia = "0.2.2"
     }
 
-    val magnolia   = "com.propensive" %% "magnolia"   % Version.magnolia
-    val argonaut   = "io.argonaut"    %% "argonaut"   % Version.argonaut
-    val scalaCheck = "org.scalacheck" %% "scalacheck" % Version.scalaCheck
-    val utest      = "com.lihaoyi"    %% "utest"      % Version.utest
+    val magnolia           = "com.propensive"       %% "magnolia"            % Version.magnolia
+    val argonaut           = "io.argonaut"          %% "argonaut"            % Version.argonaut
+    val scalaCheck         = "org.scalacheck"       %% "scalacheck"          % Version.scalaCheck
+    val scalaCheckMagnolia = "com.github.chocpanda" %% "scalacheck-magnolia" % Version.scalacheckMagnolia
+    val utest              = "com.lihaoyi"          %% "utest"               % Version.utest
   }
 
 // *****************************************************************************
@@ -52,11 +55,20 @@ lazy val commonSettings =
   Seq(
     // scalaVersion from .travis.yml via sbt-travisci
     // scalaVersion := "2.12.7",
-    organization := "io.panda",
-    organizationName := "Matt Searle",
+    organization := "com.github.chocpanda",
+    homepage := Option(url("https://github.com/ChocPanda/scalacheck-magnolia")),
     name := "Argonaut Magnolia",
     startYear := Some(2018),
     licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
+    developers := List(
+      Developer(
+        "ChocPanda",
+        "Matt Searle",
+        "mattsearle@ymail.com",
+        url("https://github.com/ChocPanda/")
+      )
+    ),
+    updateOptions := updateOptions.value.withGigahorse(false),
     scalacOptions ++= Seq(
       "-unchecked",
       "-deprecation",
