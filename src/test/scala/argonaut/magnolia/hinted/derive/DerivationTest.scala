@@ -35,11 +35,11 @@ object DerivationTest extends TestSuite {
 
     'Encode - {
       'Empty - {
-        assert(Empty.asJson == Json.obj())
+        Empty.asJson ==> Json.obj()
       }
 
       'EmptyCC - {
-        assert(EmptyCC().asJson == Json.obj())
+        EmptyCC().asJson ==> Json.obj()
       }
     }
   }
