@@ -21,6 +21,7 @@ import argonaut._, Argonaut._
 import utest._
 
 object DerivationTest extends TestSuite {
+
   val tests = Tests {
     'Decode - {
       'Empty - {
