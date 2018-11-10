@@ -18,7 +18,6 @@ package argonaut.magnolia.hinted.derive
 
 import adt.{ Empty, EmptyCC }
 import argonaut._
-import Argonaut._
 import utest._
 import DecodeJsonTool._
 

@@ -16,8 +16,6 @@
 
 package argonaut.magnolia
 
-import argonaut.CodecJson
-
 package object derive {
 
 //  implicit def deriveCodec[T]: CodecJson[T] = {

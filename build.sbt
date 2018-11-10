@@ -16,7 +16,8 @@ lazy val `argonaut-magnolia` =
         library.utest      % Test
       )
     )
-  .enablePlugins(AutomateHeaderPlugin)
+    .enablePlugins(AutomateHeaderPlugin)
+    .enablePlugins(GitBranchPrompt)
 
 // *****************************************************************************
 // Library dependencies

@@ -38,8 +38,9 @@ trait DecodeJsonTool {
 
   def combine[T](caseClass: CaseClass[Typeclass, T]): Typeclass[T] = { cursor: HCursor =>
     caseClass.constructMonadic { p =>
-      // Todo Remove the use of asInstanceOf
-      (cursor --\ p.label).as(p.typeclass).asInstanceOf[DecodeResult[Param[DecodeJsonTool.this.Typeclass, T]#PType]]
+      (cursor --\ p.label).as(p.typeclass).map { a: Param[Typeclass, T]#PType =>
+        a
+      }
     }
   }
 
