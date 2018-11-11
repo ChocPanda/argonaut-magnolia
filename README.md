@@ -1,6 +1,5 @@
 # Argonaut Magnolia #
-
-Welcome to argonaut-magnolia!
+[![Build Status](https://travis-ci.org/ChocPanda/argonaut-magnolia.svg?branch=master)](https://travis-ci.org/ChocPanda/argonaut-magnolia)
 
 This project is a WORK IN PROGRESS, DO NOT USE IT
 
