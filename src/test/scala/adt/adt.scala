@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Matt Searle
+ * Copyright 2018 com.github.chocpanda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package adt
-
-object Empty
+package org.scalacheck.magnolia.adt
 
 final case class EmptyCC()
 
 /*
-  For testing purposes I am using the adt's used to benchmark magnolia
-  These were copied and pasted from https://github.com/propensive/magnolia/blob/master/benchmarks/2.12/src/adt.scala
+ * For testing purposes I am using the adt's used to benchmark magnolia
+ * These were copied and pasted from https://github.com/propensive/magnolia/blob/master/benchmarks/2.12/src/adt.scala
  */
 
 sealed trait Tree
@@ -30,7 +28,7 @@ final case class Leaf(value: String)             extends Tree
 final case class Branch(left: Tree, right: Tree) extends Tree
 
 sealed trait GTree[+T]
-final case class GLeaf[+T](value: String)                     extends GTree[T]
+final case class GLeaf[+T](value: T)                          extends GTree[T]
 final case class GBranch[+T](left: GTree[T], right: GTree[T]) extends GTree[T]
 
 sealed trait Entity
@@ -41,17 +39,17 @@ final case class Address(line1: String, occupant: Human)
 
 sealed trait Alphabet
 
-final case class Greek(άλφα: Letter,
-                       βήτα: Letter,
-                       γάμα: Letter,
-                       δέλτα: Letter,
-                       έψιλον: Letter,
-                       ζήτα: Letter,
-                       ήτα: Letter,
-                       θήτα: Letter)
-    extends Alphabet
+final case class Greek(`άλφα`: Letter,
+                       `βήτα`: Letter,
+                       `γάμα`: Letter,
+                       `δέλτ`: Letter,
+                       `έψιλον`: Letter,
+                       `ζήτα`: Letter,
+                       `ήτ`: Letter,
+                       `θήτα`: Letter)
+  extends Alphabet
 
-final case class Cyrillic(б: Letter, в: Letter, г: Letter, д: Letter, ж: Letter, з: Letter) extends Alphabet
+final case class Cyrillic(`б`: Letter, `в`: Letter, `г`: Letter, `д`: Letter, `ж`: Letter, `з`: Letter) extends Alphabet
 
 final case class Latin(a: Letter,
                        b: Letter,
@@ -75,10 +73,10 @@ final case class Latin(a: Letter,
                        t: Letter,
                        u: Letter,
                        v: Letter)
-    extends Alphabet
+  extends Alphabet
 
 final case class Letter(name: String, phonetic: String)
-final case class Country(name: String, language: Language, leader: Person, existence: DateRange)
+final case class Country(name: String, language: List[Language], leader: Person, existence: DateRange)
 final case class Language(name: String, code: String, alphabet: Alphabet)
 final case class Person(name: String, dateOfBirth: Date)
 final case class Date(year: Int, month: Month, day: Int)
