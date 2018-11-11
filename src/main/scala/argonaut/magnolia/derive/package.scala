@@ -22,7 +22,7 @@ import mercator.Monadic
 
 import scala.language.experimental.macros
 
-package object derive {
+package object derive extends argonaut.magnolia.CodecJsons {
 
   type Typeclass[T] = CodecJson[T]
 
@@ -59,17 +59,20 @@ package object derive {
         Json.obj((subtype.typeName.short, json))
       }
     }
-    val typeNames = Map(ctx.subtypes.map(subType => (subType.typeName.short, subType.typeclass)): _*)
+
     val decoder: HCursor => DecodeResult[T] = { cursor: HCursor =>
-      for {
-        typeName  <- cursor.field(typeHintField).as[String] // This isn't what I meant
-        typeclass <- DecodeResult(typeNames.get(typeName).toRight(("Unrecognized type hint:", cursor.history)))
-        res       <- typeclass.decode(cursor)
-      } yield res
+      ctx.subtypes
+        .map(subType => (subType.typeName.short, subType.typeclass))
+        .foldLeft(DecodeResult.fail[T]("", cursor.history)) {
+          case (result, (typeName, subTypeDecoder)) =>
+            result ||| (cursor --\ typeName).as(subTypeDecoder).map { r: T =>
+              r
+            }
+        }
     }
     CodecJson[T](encoder, decoder)
   }
 
-  implicit def gen[T]: Typeclass[T] = macro Magnolia.gen[T]
+  implicit def deriveCodec[T]: CodecJson[T] = macro Magnolia.gen[T]
 
 }
