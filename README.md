@@ -1,7 +1,11 @@
 # Argonaut Magnolia #
 [![Build Status](https://travis-ci.org/ChocPanda/argonaut-magnolia.svg?branch=master)](https://travis-ci.org/ChocPanda/argonaut-magnolia)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.chocpanda/argonaut-magnolia_2.12/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.chocpanda/argonaut-magnolia)
 
-This project is a WORK IN PROGRESS, DO NOT USE IT
+This project is in an experimental state, but it compiles and there are alpha releases out but the unit tests fail intermittently.
+I would appreciate any feedback/help if it's useful.
+
+Documentation is coming...
 
 I am attempting to derive [Argonaut](https://github.com/argonaut-io/argonaut) codecs
 using [Magnolia](https://github.com/propensive/magnolia). The functionality would be very similar to
