@@ -16,6 +16,8 @@
 
 package argonaut.magnolia.adt
 
+object Empty
+
 final case class EmptyCC()
 
 /*
@@ -47,7 +49,7 @@ final case class Greek(`άλφα`: Letter,
                        `ζήτα`: Letter,
                        `ήτ`: Letter,
                        `θήτα`: Letter)
-  extends Alphabet
+    extends Alphabet
 
 final case class Cyrillic(`б`: Letter, `в`: Letter, `г`: Letter, `д`: Letter, `ж`: Letter, `з`: Letter) extends Alphabet
 
@@ -73,7 +75,7 @@ final case class Latin(a: Letter,
                        t: Letter,
                        u: Letter,
                        v: Letter)
-  extends Alphabet
+    extends Alphabet
 
 final case class Letter(name: String, phonetic: String)
 final case class Country(name: String, language: List[Language], leader: Person, existence: DateRange)

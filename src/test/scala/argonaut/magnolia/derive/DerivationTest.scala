@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Matt Searle
+ * Copyright 2018 com.github.chocpanda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 package argonaut.magnolia.derive
 
-import adt._
+import argonaut.magnolia.adt.{ Empty, EmptyCC }
 import argonaut._, Argonaut._
 import utest._
 
