@@ -18,10 +18,12 @@ package argonaut.magnolia.hinted.derive
 
 import argonaut.magnolia.Utils._
 import argonaut.magnolia.adt._
-import org.scalacheck.Arbitrary
-import utest.{ ArrowAssert => _, _ }
-import org.scalacheck.Prop._
 import argonaut._, Argonaut._
+
+import utest.{ ArrowAssert => _, _ }
+
+import org.scalacheck.Arbitrary
+import org.scalacheck.Prop._
 import org.scalacheck.magnolia._
 
 object DerivationTest extends TestSuite {

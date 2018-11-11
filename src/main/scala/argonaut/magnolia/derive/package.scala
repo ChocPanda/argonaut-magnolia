@@ -42,6 +42,7 @@ package object derive extends argonaut.magnolia.CodecJsons {
         (param.label, param.typeclass.encode(param.dereference(t)))
       }: _*)
     }
+
     val decoder: HCursor => DecodeResult[T] = { cursor: HCursor =>
       ctx.constructMonadic { p =>
         (cursor --\ p.label).as(p.typeclass).map { a: Param[Typeclass, T]#PType =>
@@ -49,6 +50,7 @@ package object derive extends argonaut.magnolia.CodecJsons {
         }
       }
     }
+
     CodecJson[T](encoder, decoder)
   }
 
@@ -70,6 +72,7 @@ package object derive extends argonaut.magnolia.CodecJsons {
             }
         }
     }
+
     CodecJson[T](encoder, decoder)
   }
 
