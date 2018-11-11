@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.scalacheck.magnolia.adt
+package argonaut.magnolia.adt
 
 final case class EmptyCC()
 
