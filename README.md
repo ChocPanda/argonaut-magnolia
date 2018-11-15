@@ -12,12 +12,17 @@ compile time benefits that magnolia provides over shapeless.
 
 It's very simple to use simply add to your build.sbt:
 ```scala
-    libraryDependencies += "com.github.chocpanda" % argonaut-magnolia % 0.2.0
+libraryDependencies += "com.github.chocpanda" % argonaut-magnolia % 0.2.0
 ```
 
 and import:
 ```scala
-   import argonaut.magnolia._
+import argonaut.magnolia.derive._
+```
+
+or
+```scala
+import argonaut.magnolia.hinted.derive._
 ```
 
 into the relevant test files for instances of Arbitrary for all your testing needs
