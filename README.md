@@ -25,8 +25,6 @@ or
 import argonaut.magnolia.hinted.derive._
 ```
 
-into the relevant test files for instances of Arbitrary for all your testing needs
-
 ## Examples ##
 
 #### Basic product types ####
