@@ -32,7 +32,7 @@ import argonaut.magnolia.hinted.derive._
 ```scala
 package argonaut.magnolia.example
 
-import argonaut.magnolia.derive_
+import argonaut.magnolia.derive._
 import argonaut._, Argonaut._
 
 object ExampleTest {
@@ -70,7 +70,7 @@ object ExampleTest {
 ```scala
 package argonaut.magnolia.example
 
-import argonaut.magnolia.derive_
+import argonaut.magnolia.derive._
 import argonaut._, Argonaut._
 
 object ExampleTest {
@@ -97,7 +97,7 @@ resultant json object. In the same way [ArgonautShapeless](https://github.com/al
 
 package argonaut.magnolia.example
 
-import argonaut.magnolia.derive_
+import argonaut.magnolia.derive._
 import argonaut._, Argonaut._
 
 object ExampleTest {
@@ -130,7 +130,7 @@ object ExampleTest {
 ```scala
 package argonaut.magnolia.example
 
-import argonaut.magnolia.derive_
+import argonaut.magnolia.derive._
 import argonaut._, Argonaut._
 
 object ExampleTest {
@@ -210,9 +210,98 @@ object ExampleTest {
 }
 ```
 
-## Type hints ##
+### Type hints ###
 
-WIP
+Hinted Argonaut codecs was inspired by [circe-field-hints](https://github.com/drivetribe/circe-field-hints) where
+instead of reifying the type hint outside of the object as is done in [ArgonautShapeless](https://github.com/alexarchambault/argonaut-shapeless)
+we add an extra field to the resultant json object with the type hint. (Note the alternative import to use this feature)
+
+```scala
+
+package argonaut.magnolia.example
+
+import argonaut.magnolia.hinted.derive._
+import argonaut._, Argonaut._
+
+object ExampleTest {
+    
+    sealed trait Entity
+    
+    final case class Company(name: String)         extends Entity
+    final case class Human(name: String, age: Int) extends Entity
+    
+    EncodeJson.of[Entity].encode(Company("ChocPanda Ltd")).spaces2
+    /**
+      * res10: String =
+      *  {
+      *    "name" : "ChocPanda Ltd",
+      *    "type" : "Company"
+      *  }
+      */
+
+    Parse.decode[Entity](res10)
+    
+    /**
+      * res15: Either[Either[String,(String, argonaut.CursorHistory)],Entity] = Right(Company(ChocPanda Ltd)) 
+      */
+}
+```
+
+This is useful firstly because if you do any manual json parsing or write a function to do any manual parsing you have
+the same number of fields to go down into the json object regardless of whether the type field is serialised, which in
+our case would be the difference between:
+
+```scala
+
+package argonaut.magnolia.example
+
+import argonaut._, Argonaut._
+    
+sealed trait Entity
+
+final case class Company(name: String)         extends Entity
+final case class Human(name: String, age: Int) extends Entity
+
+object HintedTest {
+        
+    import argonaut.magnolia.hinted.derive._
+    
+    val human: Human = Human("ChocPanda", 26)
+    val entity: Entity = human
+    
+    /**
+      * scala> human.asJson.spaces2
+      *  res2: String =
+      *  {
+      *    "name" : "ChocPanda",
+      *    "age" : 26
+      *  }
+      *
+      *  scala> entity.asJson.spaces2
+      *   res3: String 
+      *   {
+      *     "name" : "ChocPanda",
+      *     "age" : 26,
+      *     "type" : "Human"
+      *   }
+      */
+      
+      
+    
+}
+```
+
+Iterating over the above resultant json is easier than iterating over the json produced by  
+
+## Features left to add ##
+
+- Configurability
+    - Add support for customisation of the serialized object such as serpent cased field names
+    - Different field names for the type hints
+    - etc...
+- Add support for default values and configurability as to whether they are serialised
+- Add support for [refined](https://github.com/fthomas/refined) types / some other validation
+- Compile for other scala versions including scala-native and scalaJS
 
 ## Contribution policy ##
 
