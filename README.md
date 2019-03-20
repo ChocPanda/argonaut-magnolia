@@ -12,7 +12,7 @@ compile time benefits that magnolia provides over shapeless.
 
 It's very simple to use simply add to your build.sbt:
 ```scala
-libraryDependencies += "com.github.chocpanda" % argonaut-magnolia % 0.2.0
+libraryDependencies += "com.github.chocpanda" %% "argonaut-magnolia" % "0.2.0"
 ```
 
 and import:
