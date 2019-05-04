@@ -6,6 +6,10 @@ target
 # Worksheets (Eclipse or IntelliJ)
 *.sc
 
+# vscode
+.metals/
+.bloop/
+
 # Eclipse
 .cache*
 .classpath

@@ -1,6 +1,6 @@
 # Argonaut Magnolia #
 [![Build Status](https://travis-ci.org/ChocPanda/argonaut-magnolia.svg?branch=master)](https://travis-ci.org/ChocPanda/argonaut-magnolia)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.chocpanda/argonaut-magnolia_2.12/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.chocpanda/argonaut-magnolia)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.chocpanda/argonaut-magnolia_2.12/badge.svg)](https://search.maven.org/search?q=a:argonaut-magnolia_2.12)
 
 This project is in an experimental state, but it compiles and there are alpha releases out but the unit tests fail intermittently.
 I would appreciate any feedback/help if it's useful.
