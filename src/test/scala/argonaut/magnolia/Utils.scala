@@ -15,28 +15,17 @@
  */
 
 package argonaut.magnolia
-
 import org.scalacheck.{ Prop, Test }
 
 object Utils {
 
   /**
-    * This was largely copy and pasted from:
-    * https://github.com/lihaoyi/utest/blob/5b382ae0a4bb3a25d8cb64d332b7bcb7fc73ace2/utest/shared/src/main/scala/utest/asserts/Asserts.scala#L185
-    *
-    * I have just extended it a little for interoperability with org.scalacheck by returning true at the end
+    * Add interoperability with org.scalacheck by returning true at the end
+    * ScalaCheck Test requires a non-void return type
     */
   implicit class ArrowAssert[T](lhs: T) {
     def ==>[V](rhs: V): Boolean = {
-      (lhs, rhs) match {
-        // Hack to make Arrays compare sanely; at some point we may want some
-        // custom, extensible, typesafe equality check but for now this will do
-        case (lhs: Array[_], rhs: Array[_]) =>
-          Predef.assert(lhs.toSeq == rhs.toSeq, s"==> assertion failed: ${lhs.toSeq} != ${rhs.toSeq}")
-        case (_, _) =>
-          Predef.assert(lhs == rhs, s"==> assertion failed: $lhs != $rhs")
-      }
-
+      utest.ArrowAssert(lhs).==>[V](rhs)
       true
     }
   }
