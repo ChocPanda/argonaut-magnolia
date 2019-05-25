@@ -56,7 +56,7 @@ lazy val commonSettings =
     // scalaVersion from .travis.yml via sbt-travisci
     // scalaVersion := "2.12.7",
     organization := "com.github.chocpanda",
-    homepage := Option(url("https://github.com/ChocPanda/scalacheck-magnolia")),
+    homepage := Option(url("https://github.com/ChocPanda/argonaut-magnolia")),
     name := "Argonaut Magnolia",
     startYear := Some(2018),
     licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
@@ -92,7 +92,7 @@ lazy val fmtSettings =
 
 lazy val fixSettings =
   Seq(
-    libraryDependencies += compilerPlugin(scalafixSemanticdb),
+    addCompilerPlugin(scalafixSemanticdb),
     scalacOptions ++= Seq(
       "-Yrangepos",
       "-Ywarn-unused-import"
