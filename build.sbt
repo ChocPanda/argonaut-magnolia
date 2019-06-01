@@ -57,7 +57,6 @@ lazy val commonSettings =
   Seq(
     // scalaVersion from .travis.yml via sbt-travisci
     // scalaVersion := "2.12.7",
-    sonarUseExternalConfig := true,
     organization := "com.github.chocpanda",
     homepage := Option(url("https://github.com/ChocPanda/argonaut-magnolia")),
     name := "Argonaut Magnolia",
@@ -71,6 +70,8 @@ lazy val commonSettings =
         url("https://github.com/ChocPanda/")
       )
     ),
+    sonarUseExternalConfig := true,
+    scapegoatVersion in ThisBuild := "1.3.8",
     updateOptions := updateOptions.value.withGigahorse(false),
     scalacOptions ++= Seq(
       "-unchecked",
