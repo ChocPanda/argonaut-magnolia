@@ -11,6 +11,7 @@ jdk: oraclejdk8
 
 stages:
   - name: test
+  - name: report
   - name: release
     if: (branch = master AND type = push) OR (tag IS present) AND NOT fork
 
@@ -30,7 +31,9 @@ jobs:
       script: sbt compile
     - env: TEST="test"
       name: "Unit tests"
-      script: sbt test
+      script: scripts/run-ci-tests.sh
+    - stage: report
+      script: sonar-scanner
     - stage: release
       script: sbt ci-release
 
@@ -51,3 +54,7 @@ before_cache:
 
 before_install:
   - git fetch --tags
+
+addons:
+  sonarcloud:
+    organization: chocpanda-github

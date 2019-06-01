@@ -1,3 +1,5 @@
+import sbtsonar.SonarPlugin.autoImport.sonarUseExternalConfig
+
 // *****************************************************************************
 // Projects
 // *****************************************************************************
@@ -55,6 +57,7 @@ lazy val commonSettings =
   Seq(
     // scalaVersion from .travis.yml via sbt-travisci
     // scalaVersion := "2.12.7",
+    sonarUseExternalConfig := true,
     organization := "com.github.chocpanda",
     homepage := Option(url("https://github.com/ChocPanda/argonaut-magnolia")),
     name := "Argonaut Magnolia",
