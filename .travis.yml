@@ -31,9 +31,9 @@ jobs:
       script: sbt compile
     - env: TEST="test"
       name: "Unit tests"
-      script: scripts/run-ci-tests.sh
+      script: bash scripts/run-ci-tests.sh
     - stage: report
-      script: sonar-scanner
+      script: sbt sonarScan
     - stage: release
       script: sbt ci-release
 
