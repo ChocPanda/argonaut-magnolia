@@ -1,5 +1,5 @@
 # Argonaut Magnolia #
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d421b100933449b1bc86ec4cb73e852d)](https://app.codacy.com/app/ChocPanda/argonaut-magnolia?utm_source=github.com&utm_medium=referral&utm_content=ChocPanda/argonaut-magnolia&utm_campaign=Badge_Grade_Dashboard)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ChocPanda_argonaut-magnolia&metric=alert_status)](https://sonarcloud.io/dashboard?id=ChocPanda_argonaut-magnolia)
 [![Build Status](https://travis-ci.org/ChocPanda/argonaut-magnolia.svg?branch=master)](https://travis-ci.org/ChocPanda/argonaut-magnolia)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.chocpanda/argonaut-magnolia_2.12/badge.svg)](https://search.maven.org/search?q=a:argonaut-magnolia_2.12)
 
