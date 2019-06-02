@@ -25,7 +25,7 @@ jobs:
       script: sbt stylecheck
     - env: TEST="scalafix --check - Using fixcheck"
       name: "Extended style checks"
-      script: sbt fixcheck
+      script: sbt fixcheck && sbt scapegoat
     - env: TEST="compile"
       name: "Compile"
       script: sbt compile
