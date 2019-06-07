@@ -9,6 +9,10 @@ scala:
 
 jdk: oraclejdk8
 
+addons:
+  sonarcloud:
+    organization: chocpanda-github
+
 stages:
   - name: test
   - name: report
@@ -33,7 +37,6 @@ jobs:
       name: "Unit tests"
       script: bash scripts/run-ci-tests.sh
     - stage: report
-      env: SONAR_SCANNER_HOME="${TRAVIS_HOME}/.sonarscanner"
       script: sbt sonarScan
     - stage: release
       script: sbt ci-release
@@ -55,7 +58,3 @@ before_cache:
 
 before_install:
   - git fetch --tags
-
-addons:
-  sonarcloud:
-    organization: chocpanda-github
