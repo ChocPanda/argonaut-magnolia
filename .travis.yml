@@ -37,7 +37,7 @@ jobs:
       name: "Unit tests"
       script: bash scripts/run-ci-tests.sh
     - stage: report
-      env SONAR_SCANNER_HOME="${TRAVIS_HOME}/.sonarscanner"
+      env SONAR_SCANNER_HOME="${TRAVIS_HOME}/.sonarscanner/sonar-scanner-3.0.3.778"
       script: sbt sonarScan
     - stage: release
       script: sbt ci-release
