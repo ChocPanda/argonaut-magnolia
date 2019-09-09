@@ -7,8 +7,6 @@ language: scala
 scala:
   - 2.12.7
 
-jdk: oraclejdk8
-
 addons:
   sonarcloud:
     organization: chocpanda-github
