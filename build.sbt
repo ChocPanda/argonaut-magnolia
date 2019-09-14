@@ -10,14 +10,14 @@ lazy val `argonaut-magnolia` =
     .settings(settings)
     .settings(
       libraryDependencies ++= Seq(
-        library.argonaut,
-        library.magnolia,
-      ),
+          library.argonaut,
+          library.magnolia
+        ),
       libraryDependencies ++= Seq(
-        library.scalaCheck         % Test,
-        library.scalaCheckMagnolia % Test,
-        library.utest              % Test
-      )
+          library.scalaCheck         % Test,
+          library.scalaCheckMagnolia % Test,
+          library.utest              % Test
+        )
     )
     .enablePlugins(AutomateHeaderPlugin)
     .enablePlugins(GitBranchPrompt)
@@ -48,10 +48,10 @@ lazy val library =
 // *****************************************************************************
 
 lazy val settings =
-commonSettings ++
-fmtSettings ++
-fixSettings ++
-styleSettings
+  commonSettings ++
+  fmtSettings ++
+  fixSettings ++
+  styleSettings
 
 def versionedSettings(scalaVersion: String) = CrossVersion.partialVersion(scalaVersion) match {
   case Some((2, n)) if n <= 12 => Seq("-Ypartial-unification", "-Ywarn-unused-import", "-Yrangepos")
@@ -70,23 +70,23 @@ lazy val commonSettings =
     startYear := Option(2018),
     licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
     developers := List(
-      Developer(
-        "ChocPanda",
-        "Matt Searle",
-        "mattsearle@ymail.com",
-        url("https://github.com/ChocPanda/")
-      )
-    ),
+        Developer(
+          "ChocPanda",
+          "Matt Searle",
+          "mattsearle@ymail.com",
+          url("https://github.com/ChocPanda/")
+        )
+      ),
     sonarUseExternalConfig := true,
     scapegoatVersion in ThisBuild := "1.3.8",
     updateOptions := updateOptions.value.withGigahorse(false),
     scalacOptions ++= Seq(
-      "-unchecked",
-      "-deprecation",
-      "-language:_",
-      "-target:jvm-1.8",
-      "-encoding",
-      "UTF-8"
+        "-unchecked",
+        "-deprecation",
+        "-language:_",
+        "-target:jvm-1.8",
+        "-encoding",
+        "UTF-8"
       ) ++ versionedSettings(scalaVersion.value),
     testFrameworks += new TestFramework("utest.runner.Framework"),
     Compile / unmanagedSourceDirectories := Seq((Compile / scalaSource).value),
