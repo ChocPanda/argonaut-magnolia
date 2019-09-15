@@ -33,7 +33,7 @@ lazy val library =
       val magnolia           = "0.11.0"
       val argonaut           = "6.2.3"
       val utest              = "0.7.1"
-      val scalacheckMagnolia = "0.2.2"
+      val scalacheckMagnolia = "0.3.0"
     }
 
     val magnolia           = "com.propensive"       %% "magnolia"            % Version.magnolia
@@ -78,7 +78,7 @@ lazy val commonSettings =
         )
       ),
     sonarUseExternalConfig := true,
-    scapegoatVersion in ThisBuild := "1.3.8",
+    scapegoatVersion in ThisBuild := "1.3.10",
     updateOptions := updateOptions.value.withGigahorse(false),
     scalacOptions ++= Seq(
         "-unchecked",
