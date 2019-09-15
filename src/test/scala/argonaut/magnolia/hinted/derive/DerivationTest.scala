@@ -29,84 +29,84 @@ import org.scalacheck.magnolia._
 object DerivationTest extends TestSuite {
 
   val tests = Tests {
-    'Decode - {
-      'Empty - {
+    "Decode" - {
+      "Empty" - {
         assert(Json.obj().as[Empty.type].value.nonEmpty)
       }
 
-      'EmptyCC - {
+      "EmptyCC" - {
         assert(Json.obj().as[EmptyCC].value.nonEmpty)
       }
     }
 
-    'Encode - {
-      'Empty - {
+    "Encode" - {
+      "Empty" - {
         Empty.asJson ==> Json.obj()
       }
 
-      'EmptyCC - {
+      "EmptyCC" - {
         EmptyCC().asJson ==> Json.obj()
       }
     }
 
-    'adt - {
+    "adt" - {
 
       def testCodecLaw[T: Arbitrary]()(implicit codec: CodecJson[T]): Unit =
         forAll { t: T =>
           CodecJson.codecLaw(codec)(t)
         }.validate()
 
-      'ProductType - {
+      "ProductType" - {
 
-        'CodecLaw - {
+        "CodecLaw" - {
 
-          'Leaf - testCodecLaw[Leaf]()
+          "Leaf" - testCodecLaw[Leaf]()
 
-          'Branch - testCodecLaw[Branch]()
+          "Branch" - testCodecLaw[Branch]()
 
-          'GLeaf - testCodecLaw[GLeaf[Int]]()
+          "GLeaf" - testCodecLaw[GLeaf[Int]]()
 
-          'GBranch - testCodecLaw[GBranch[Int]]()
+          "GBranch" - testCodecLaw[GBranch[Int]]()
 
-          'Company - testCodecLaw[Company]()
+          "Company" - testCodecLaw[Company]()
 
-          'Human - testCodecLaw[Human]()
+          "Human" - testCodecLaw[Human]()
 
-          'Address - testCodecLaw[Address]()
+          "Address" - testCodecLaw[Address]()
 
-          'Greek - testCodecLaw[Greek]()
+          "Greek" - testCodecLaw[Greek]()
 
-          'Cyrillic - testCodecLaw[Cyrillic]()
+          "Cyrillic" - testCodecLaw[Cyrillic]()
 
-          'Latin - testCodecLaw[Latin]()
+          "Latin" - testCodecLaw[Latin]()
 
-          'Letter - testCodecLaw[Letter]()
+          "Letter" - testCodecLaw[Letter]()
 
-          'Country - testCodecLaw[Country]()
+          "Country" - testCodecLaw[Country]()
 
-          'Language - testCodecLaw[Language]()
+          "Language" - testCodecLaw[Language]()
 
-          'Person - testCodecLaw[Person]()
+          "Person" - testCodecLaw[Person]()
 
-          'Date - testCodecLaw[Date]()
+          "Date" - testCodecLaw[Date]()
 
-          'DateRange - testCodecLaw[DateRange]()
+          "DateRange" - testCodecLaw[DateRange]()
 
         }
       }
 
-      'SumType - {
+      "SumType" - {
 
-        'CodecLaw - {
-          'Tree - testCodecLaw[Tree]()
+        "CodecLaw" - {
+          "Tree" - testCodecLaw[Tree]()
 
-          'GTree - testCodecLaw[GTree[Int]]()
+          "GTree" - testCodecLaw[GTree[Int]]()
 
-          'Entity - testCodecLaw[Entity]()
+          "Entity" - testCodecLaw[Entity]()
 
-          'Alphabet - testCodecLaw[Alphabet]()
+          "Alphabet" - testCodecLaw[Alphabet]()
 
-          'Month - testCodecLaw[Month]()
+          "Month" - testCodecLaw[Month]()
         }
       }
     }
