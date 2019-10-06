@@ -29,8 +29,8 @@ lazy val `argonaut-magnolia` =
 lazy val library =
   new {
     object Version {
-      val scalaCheck         = "1.14.0"
-      val magnolia           = "0.11.0"
+      val scalaCheck         = "1.14.2"
+      val magnolia           = "0.12.0"
       val argonaut           = "6.2.3"
       val utest              = "0.7.1"
       val scalacheckMagnolia = "0.3.0"
@@ -89,7 +89,13 @@ lazy val commonSettings =
         "UTF-8"
       ) ++ versionedSettings(scalaVersion.value),
     testFrameworks += new TestFramework("utest.runner.Framework"),
-    Compile / unmanagedSourceDirectories := Seq((Compile / scalaSource).value),
+    Compile / unmanagedSourceDirectories := Seq(
+        (Compile / scalaSource).value,
+        CrossVersion.partialVersion(scalaVersion.value) match {
+          case Some((2, n)) if n >= 13 => baseDirectory.value / "src" / "main" / "scala-2.13+"
+          case _                       => baseDirectory.value / "src" / "main" / "scala-2.13-"
+        }
+      ),
     Test / unmanagedSourceDirectories := Seq((Test / scalaSource).value),
     Compile / compile / wartremoverWarnings ++= Warts.unsafe
   )
