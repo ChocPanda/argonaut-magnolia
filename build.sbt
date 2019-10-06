@@ -84,7 +84,6 @@ lazy val commonSettings =
         "-unchecked",
         "-deprecation",
         "-language:_",
-        "-target:jvm-1.8",
         "-encoding",
         "UTF-8"
       ) ++ versionedSettings(scalaVersion.value),
