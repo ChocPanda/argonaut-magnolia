@@ -26,13 +26,13 @@ trait CodecJsons extends EncodeJsons with DecodeJsons {
 
   implicit val UnitCodecJson: CodecJson[Unit] = CodecJson(UnitEncodeJson.encode, UnitDecodeJson.decode)
 
-  implicit def ListCodecJson[A](implicit e: CodecJson[A]): CodecJson[List[A]] =
+  implicit def listCodecJson[A](implicit e: CodecJson[A]): CodecJson[List[A]] =
     CodecJson(ListEncodeJson[A](e).encode, ListDecodeJson[A](e).decode)
 
-  implicit def VectorCodecJson[A](implicit e: CodecJson[A]): CodecJson[Vector[A]] =
-    CodecJson(VectorEncodeJson[A](ListCodecJson(e)).encode, VectorDecodeJson[A](e).decode)
+  implicit def vectorCodecJson[A](implicit e: CodecJson[A]): CodecJson[Vector[A]] =
+    CodecJson(VectorEncodeJson[A](listCodecJson(e)).encode, VectorDecodeJson[A](e).decode)
 
-  implicit def StreamCodecJson[A](implicit e: CodecJson[A]): CodecJson[Stream[A]] =
+  implicit def streamCodecJson[A](implicit e: CodecJson[A]): CodecJson[Stream[A]] =
     CodecJson(StreamEncodeJson[A](e).encode, StreamDecodeJson[A](e).decode)
 
   implicit val StringCodecJson: CodecJson[String] = CodecJson(StringEncodeJson.encode, StringDecodeJson.decode)
@@ -80,19 +80,23 @@ trait CodecJsons extends EncodeJsons with DecodeJsons {
   implicit val JCharacterCodecJson: CodecJson[java.lang.Character] =
     CodecJson(JCharacterEncodeJson.encode, JCharacterDecodeJson.decode)
 
-  implicit def OptionCodecJson[A](implicit e: CodecJson[A]): CodecJson[Option[A]] =
+  implicit def optionCodecJson[A](implicit e: CodecJson[A]): CodecJson[Option[A]] =
     CodecJson(OptionEncodeJson[A](e).encode, OptionDecodeJson[A](e).decode)
 
-  implicit def EitherCodecJson[A, B](implicit ea: CodecJson[A], eb: CodecJson[B]): CodecJson[Either[A, B]] =
+  implicit def eitherCodecJson[A, B](implicit ea: CodecJson[A], eb: CodecJson[B]): CodecJson[Either[A, B]] =
     CodecJson(EitherEncodeJson[A, B](ea, eb).encode, EitherDecodeJson[A, B](ea, eb).decode)
 
-  implicit def MapCodecJson[K, V](implicit ek: EncodeJsonKey[K],
-                                  dk: DecodeJsonKey[K],
-                                  cv: CodecJson[V]): CodecJson[Map[K, V]] =
-    CodecJson(MapEncodeJson[K, V](ek, cv).encode,
-              MapDecodeJson[V](cv).decode(_).map(_.map { case (k, v) => (dk.fromJsonKey(k), v) }))
+  implicit def mapCodecJson[K, V](
+    implicit ek: EncodeJsonKey[K],
+    dk: DecodeJsonKey[K],
+    cv: CodecJson[V]
+  ): CodecJson[Map[K, V]] =
+    CodecJson(
+      MapEncodeJson[K, V](ek, cv).encode,
+      MapDecodeJson[V](cv).decode(_).map(_.map { case (k, v) => (dk.fromJsonKey(k), v) })
+    )
 
-  implicit def SetCodecJson[A](implicit e: CodecJson[A]): CodecJson[Set[A]] =
+  implicit def setCodecJson[A](implicit e: CodecJson[A]): CodecJson[Set[A]] =
     CodecJson(SetEncodeJson[A](e).encode, SetDecodeJson[A](e).decode)
 
 }

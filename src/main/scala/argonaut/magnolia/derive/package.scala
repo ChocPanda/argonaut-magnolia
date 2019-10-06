@@ -31,9 +31,9 @@ package object derive extends argonaut.magnolia.CodecJsons {
   implicit private val monadic: Monadic[DecodeResult] = new Monadic[DecodeResult] {
     override def point[A](value: A): DecodeResult[A] = DecodeResult.ok(value)
 
-    override def flatMap[A, B](from: DecodeResult[A], fn: A => DecodeResult[B]): DecodeResult[B] = from.flatMap(fn)
+    override def flatMap[A, B](from: DecodeResult[A])(fn: A => DecodeResult[B]): DecodeResult[B] = from.flatMap(fn)
 
-    override def map[A, B](from: DecodeResult[A], fn: A => B): DecodeResult[B] = from.map(fn)
+    override def map[A, B](from: DecodeResult[A])(fn: A => B): DecodeResult[B] = from.map(fn)
   }
 
   def combine[T](ctx: CaseClass[Typeclass, T]): Typeclass[T] = {
